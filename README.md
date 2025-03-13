@@ -119,4 +119,42 @@ Le projet inclut Prometheus et Grafana pour le monitoring. Vous pouvez accéder 
 
 Pour contribuer au projet, veuillez suivre ces étapes :
 
-1. Créez une br
+
+setup-rest-api-boilerplate/
+│── docker/                       # 📂 Dossier contenant tous les fichiers Docker
+│   │── nginx/
+│   │   ├── default.conf          # 📄 Configuration Nginx pour le serveur web
+│   │── mysql/
+│   │   ├── my.cnf                # 📄 Configuration MySQL (facultatif)
+│   │── php/
+│   │   ├── Dockerfile            # 📄 Dockerfile pour PHP-FPM + extensions Laravel
+│   │── supervisor/
+│   │   ├── worker.conf           # 📄 Configuration Supervisor pour gérer les workers queue
+│── .dockerignore                 # 🚫 Ignore certains fichiers lors de la copie dans Docker
+│── .env                          # 🛠️ Variables d'environnement Laravel
+│── .env.example                  # 📄 Fichier d'exemple des variables d'environnement
+│── docker-compose.yml             # 🏗️ Fichier de configuration des services Docker
+│── Dockerfile                     # 📄 Dockerfile principal pour Laravel (facultatif si dans docker/php/)
+│── app/                           # 📂 Code source Laravel
+│── bootstrap/                     # 📂 Cache et bootstrap de Laravel
+│── config/                        # 📂 Fichiers de configuration Laravel
+│── database/                      # 📂 Migrations, seeders et factories
+│── routes/                        # 📂 Fichiers des routes API et Web
+│── storage/                       # 📂 Logs, sessions et cache Laravel
+│── vendor/                        # 📂 Dépendances Composer
+│── composer.json                   # 📄 Dépendances Laravel
+│── artisan                         # ⚡ Commandes artisan Laravel
+│── public/                         # 📂 Dossier public accessible (inclut index.php)
+│── tests/                          # 📂 Tests unitaires et fonctionnels
+
+
+1️⃣ Démarrer les containers 🚀
+docker-compose up -d --build
+2️⃣ Vérifier les logs 🔎
+docker-compose logs -f
+3️⃣ Accéder au container PHP 🐳
+docker exec -it laravel_app bash
+4️⃣ Migrer la base de données 🛠️
+docker exec -it laravel_app php artisan migrate
+5️⃣ Arrêter et nettoyer Docker 🧹
+docker-compose down --volumes
