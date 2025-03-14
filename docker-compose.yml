@@ -58,8 +58,27 @@ services:
         networks:
             - laravel_network
 
+    mysql_test:
+        image: mysql:8.0
+        container_name: laravel_mysql_test
+        restart: always
+        environment:
+            MYSQL_DATABASE: laravel_test_db
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: laravel_test_user
+            MYSQL_PASSWORD: secret
+        ports:
+            - "3307:3306"
+        networks:
+            - laravel_network
+        volumes:
+            - mysql_test_data:/var/lib/mysql
+
+
 networks:
     laravel_network:
 
 volumes:
     mysql_data:
+    mysql_test_data:
+

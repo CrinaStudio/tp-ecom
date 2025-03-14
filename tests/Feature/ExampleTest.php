@@ -1,19 +1,22 @@
 <?php
 
-namespace Tests\Feature;
-
-// use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\User;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
+    public function setUp(): void
     {
-        $response = $this->get('/');
+        parent::setUp();
+    }
 
-        $response->assertStatus(200);
+
+    public function test_it_creates_a_user()
+    {
+        User::factory()->create([
+            'email' => 'test@example.com',
+        ]);
+
+        $this->assertDatabaseHas('users', ['email' => 'test@example.com']);
     }
 }
