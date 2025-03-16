@@ -81,4 +81,3 @@ networks:
 volumes:
     mysql_data:
     mysql_test_data:
-
