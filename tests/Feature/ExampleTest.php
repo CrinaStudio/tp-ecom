@@ -1,15 +1,19 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Src\User\Infrastructure\Models\User;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    use RefreshDatabase;
 
     public function setUp(): void
     {
         parent::setUp();
+        $this->refreshApplication();
+
     }
 
 
