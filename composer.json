@@ -10,7 +10,8 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.0",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -20,8 +21,7 @@
         "nunomaduro/collision": "^8.5",
         "orchestra/testbench": "^9.12",
         "phpunit/phpunit": "^10.5",
-        "spatie/laravel-ignition": "^2.4",
-        "ext-pdo": "*"
+        "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
         "psr-4": {
