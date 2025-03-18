@@ -1,10 +1,10 @@
 <?php
 
-namespace Src\User\Infrastructure\Provider;
+namespace Src\Shared\Infrastructure\Provider;
 
 use Illuminate\Support\ServiceProvider;
 
-class UserServiceProvider extends ServiceProvider
+class SharedServiceProvider extends ServiceProvider
 {
     public function register(): void
     {

@@ -1,8 +1,8 @@
 /.phpunit.cache
 /node_modules
-/public/build
-/public/hot
-/public/storage
+/app/public/build
+/app/public/hot
+/app/public/storage
 /storage/*.key
 /vendor
 .env
@@ -17,3 +17,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+app/storage/*
+.composer
+.bash_history
+.lesshst
+.config
+.idea

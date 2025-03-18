@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Src\User\Infrastructure\Models\User;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
