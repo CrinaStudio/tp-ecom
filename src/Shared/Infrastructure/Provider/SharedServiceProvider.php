@@ -16,8 +16,5 @@ class SharedServiceProvider extends ServiceProvider
         $this->app->singleton(IdGenerator::class, LaravelIdGenerator::class);
     }
 
-    public function boot(): void
-    {
-
-    }
+    public function boot(): void {}
 }

@@ -8,6 +8,12 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 readonly class ApiSuccessResponse implements Responsable
 {
+    /**
+     * @param mixed $data
+     * @param string[] $metadata
+     * @param int $code
+     * @param string[] $headers
+     */
     public function __construct(
         private mixed $data,
         private array $metadata = [],

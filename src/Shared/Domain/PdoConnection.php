@@ -7,5 +7,4 @@ use PDO;
 interface PdoConnection
 {
     public function getPdo(): PDO;
-
 }

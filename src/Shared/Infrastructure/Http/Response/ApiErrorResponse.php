@@ -9,20 +9,24 @@ use Throwable;
 
 readonly class ApiErrorResponse implements Responsable
 {
+    /**
+     * @param string $message
+     * @param Throwable|null $exception
+     * @param int $code
+     * @param string[] $headers
+     */
     public function __construct(
-        private string     $message,
+        private string $message,
         private ?Throwable $exception = null,
-        private int        $code = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR,
-        private array      $headers = []
-    )
-    {
-    }
+        private int $code = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR,
+        private array $headers = []
+    ) {}
 
     public function toResponse($request): JsonResponse|ResponseAlias
     {
         $response = ['message' => $this->message];
 
-        if (!is_null($this->exception) && config('app.debug')) {
+        if (! is_null($this->exception) && config('app.debug')) {
             $response['debug'] = [
                 'message' => $this->exception->getMessage(),
                 'file' => $this->exception->getFile(),

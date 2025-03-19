@@ -13,7 +13,8 @@ class BaseModel extends Model
     use SoftDeletes;
 
     public $incrementing = false;
-    protected $guarded = [];
-    protected $keyType = 'string';
 
+    protected $guarded = [];
+
+    protected $keyType = 'string';
 }
