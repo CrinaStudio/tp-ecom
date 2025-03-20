@@ -1,7 +1,8 @@
 <?php
 
-use Src\Bootstrap\Infrastructure\Providers\AppServiceProvider;
+use Src\Providers\TelescopeServiceProvider;
 
 return [
-    AppServiceProvider::class,
+    TelescopeServiceProvider::class,
+    Src\Bootstrap\Infrastructure\Providers\AppServiceProvider::class,
 ];
