@@ -25,3 +25,18 @@ ls
 php artisan migrate
 php artisan test
 exit
+ls
+php artisan test
+clear
+git status
+composer run lint
+clear
+composer run lint
+php artisan pail
+clear
+clear
+ls
+php artisan migrate
+php artisan route:list
+composer dump-autoload
+exit

@@ -1,6 +1,7 @@
 <?php
 
-use Src\Providers\TelescopeServiceProvider;
+
+use Src\Bootstrap\Infrastructure\Providers\TelescopeServiceProvider;
 
 return [
     TelescopeServiceProvider::class,

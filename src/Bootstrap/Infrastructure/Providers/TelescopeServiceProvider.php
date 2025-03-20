@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Providers;
+namespace Src\Bootstrap\Infrastructure\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
@@ -65,4 +65,5 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             ]);
         });
     }
+
 }
