@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Src\Bootstrap\Infrastructure\Providers\AppServiceProvider;
 
 $app = Application::configure(basePath: dirname(__DIR__, 2))
     ->withRouting(
@@ -15,7 +16,10 @@ $app = Application::configure(basePath: dirname(__DIR__, 2))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
-    })->create();
+    })->withProviders([
+        AppServiceProvider::class,
+    ])
+    ->create();
 
 $app->useAppPath(base_path() . '/src');
 $app->useBootstrapPath(base_path() . '/app/bootstrap');

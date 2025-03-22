@@ -34,6 +34,7 @@
     30 => 'Orchestra\\Canvas\\LaravelServiceProvider',
     31 => 'Orchestra\\Canvas\\Core\\LaravelServiceProvider',
     32 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+    33 => 'Src\\Bootstrap\\Infrastructure\\Providers\\AppServiceProvider',
   ),
   'eager' => 
   array (
@@ -53,6 +54,7 @@
     13 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     14 => 'Termwind\\Laravel\\TermwindServiceProvider',
     15 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+    16 => 'Src\\Bootstrap\\Infrastructure\\Providers\\AppServiceProvider',
   ),
   'deferred' => 
   array (

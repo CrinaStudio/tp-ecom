@@ -9,19 +9,15 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 readonly class ApiSuccessResponse implements Responsable
 {
     /**
-     * @param mixed $data
-     * @param string[] $metadata
-     * @param int $code
-     * @param string[] $headers
+     * @param  string[]  $metadata
+     * @param  string[]  $headers
      */
     public function __construct(
         private mixed $data,
         private array $metadata = [],
-        private int   $code = ResponseAlias::HTTP_OK,
+        private int $code = ResponseAlias::HTTP_OK,
         private array $headers = [],
-    )
-    {
-    }
+    ) {}
 
     public function toResponse($request): JsonResponse|ResponseAlias
     {

@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Scope;
 
 class NotSoftDeleteScope implements Scope
 {
-
     public function apply(Builder $builder, Model $model): void
     {
-         $builder->whereNull('deleted_at');
+        $builder->whereNull('deleted_at');
     }
 }
