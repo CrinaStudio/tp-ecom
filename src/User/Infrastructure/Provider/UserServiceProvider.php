@@ -3,9 +3,18 @@
 namespace Src\User\Infrastructure\Provider;
 
 use Illuminate\Support\ServiceProvider;
+use Src\User\Domain\Hasher;
+use Src\User\Domain\Repositories\WriteUserRepository;
+use Src\User\Infrastructure\Repository\EloquentWriteUserRepository;
+use Src\User\Infrastructure\Service\LaravelHasher;
 
 class UserServiceProvider extends ServiceProvider
 {
+    public $singletons = [
+        WriteUserRepository::class => EloquentWriteUserRepository::class,
+        Hasher::class => LaravelHasher::class,
+    ];
+
     public function register(): void
     {
         $this->loadMigrations();

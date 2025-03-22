@@ -24,7 +24,7 @@ class GetUserProfileActionTest extends TestCase
         $this->assertDatabaseCount('users', 1);
         $userId = $sut['userId'];
 
-        $response = $this->getJson("/users/$userId");
+        $response = $this->getJson("api/users/$userId");
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [

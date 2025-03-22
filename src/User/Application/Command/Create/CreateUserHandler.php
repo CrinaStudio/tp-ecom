@@ -2,6 +2,8 @@
 
 namespace Src\User\Application\Command\Create;
 
+use Src\Shared\Domain\Command;
+use Src\Shared\Domain\CommandHandler;
 use Src\Shared\Domain\Exceptions\NotEmptyException;
 use Src\Shared\Domain\IdGenerator;
 use Src\User\Domain\Entities\User;
@@ -9,7 +11,7 @@ use Src\User\Domain\Exceptions\AlreadyEmailExistException;
 use Src\User\Domain\Hasher;
 use Src\User\Domain\Repositories\WriteUserRepository;
 
-final readonly class CreateUserHandler
+final readonly class CreateUserHandler implements CommandHandler
 {
     public function __construct(
         private WriteUserRepository $repository,
@@ -21,7 +23,7 @@ final readonly class CreateUserHandler
      * @throws AlreadyEmailExistException
      * @throws NotEmptyException
      */
-    public function handle(CreateUserCommand $command): CreateUserResponse
+    public function handle(CreateUserCommand|Command $command): CreateUserResponse
     {
         $response = new CreateUserResponse;
 
