@@ -10,9 +10,7 @@ readonly class TransactionalHandlerFactory
 {
     public function __construct(
         private ConnectionInterface $connection,
-    )
-    {
-    }
+    ) {}
 
     public function decorate(CommandHandler $commandHandler): CommandHandler
     {

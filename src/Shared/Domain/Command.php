@@ -2,4 +2,4 @@
 
 namespace Src\Shared\Domain;
 
-readonly abstract class Command {}
+abstract readonly class Command {}

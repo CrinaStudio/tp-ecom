@@ -15,11 +15,10 @@ use Throwable;
 class CreateUserAction
 {
     public function __invoke(
-        CreateUserRequest           $request,
-        CreateUserHandler           $handler,
+        CreateUserRequest $request,
+        CreateUserHandler $handler,
         TransactionalHandlerFactory $transactionalHandlerFactory
-    ): Responsable
-    {
+    ): Responsable {
         try {
             $transactionalHandler = $transactionalHandlerFactory->decorate($handler);
             $command = CreateUserCommandFactory::fromRequest($request);

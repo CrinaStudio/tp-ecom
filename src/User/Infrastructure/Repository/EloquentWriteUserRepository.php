@@ -8,7 +8,6 @@ use Src\User\Infrastructure\Models\User;
 
 class EloquentWriteUserRepository implements WriteUserRepository
 {
-
     public function save(UserSnapshot $user): void
     {
         User::query()->create($user->toArray());

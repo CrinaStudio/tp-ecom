@@ -11,7 +11,8 @@ use Tests\TestCase;
 class CreateUserActionTest extends TestCase
 {
     use RefreshDatabase;
-    public function setUp(): void
+
+    protected function setUp(): void
     {
         parent::setUp();
         $this->refreshDatabase();
@@ -24,7 +25,7 @@ class CreateUserActionTest extends TestCase
             'name' => 'John Doe',
             'email' => 'john.doe@example.com',
             'password' => 'StrongPassword123!',
-            'password_confirmation' => 'StrongPassword123!'
+            'password_confirmation' => 'StrongPassword123!',
         ];
 
         // 2. Act - Faire la requête vers l'API
@@ -41,7 +42,7 @@ class CreateUserActionTest extends TestCase
         // Vérifier que l'utilisateur existe en base de données
         $this->assertDatabaseHas('users', [
             'name' => 'John Doe',
-            'email' => 'john.doe@example.com'
+            'email' => 'john.doe@example.com',
         ]);
 
         // Récupérer l'utilisateur créé et vérifier le hash du mot de passe
@@ -57,7 +58,7 @@ class CreateUserActionTest extends TestCase
             'name' => 'Existing User',
             'email' => 'existing@example.com',
             'password' => 'StrongPassword123!',
-            'password_confirmation' => 'StrongPassword123!'
+            'password_confirmation' => 'StrongPassword123!',
         ];
 
         $this->postJson('/api/users', $existingUserData);
@@ -67,7 +68,7 @@ class CreateUserActionTest extends TestCase
             'name' => 'New User',
             'email' => 'existing@example.com', // Même email
             'password' => 'AnotherPassword456!',
-            'password_confirmation' => 'AnotherPassword456!'
+            'password_confirmation' => 'AnotherPassword456!',
         ];
 
         $response = $this->postJson('/api/users', $newUserData);
@@ -76,7 +77,7 @@ class CreateUserActionTest extends TestCase
         $response->assertStatus(422)
             ->assertJsonStructure([
                 'message',
-                'errors'
+                'errors',
             ]);
 
         // Vérifier qu'un seul utilisateur avec cet email existe
@@ -90,7 +91,7 @@ class CreateUserActionTest extends TestCase
             'name' => '', // Nom vide
             'email' => 'not-an-email', // Email invalide
             'password' => '123', // Mot de passe trop court
-            'password_confirmation' => '1234' // Ne correspond pas
+            'password_confirmation' => '1234', // Ne correspond pas
         ];
 
         // 2. Act - Faire la requête vers l'API
@@ -118,7 +119,7 @@ class CreateUserActionTest extends TestCase
             'name' => 'Transaction Test',
             'email' => 'transaction@example.com',
             'password' => 'StrongPassword123!',
-            'password_confirmation' => 'StrongPassword123!'
+            'password_confirmation' => 'StrongPassword123!',
         ];
 
         // 2. Act - Faire la requête qui va échouer
@@ -128,7 +129,7 @@ class CreateUserActionTest extends TestCase
         $response->assertStatus(500);
 
         $this->assertDatabaseMissing('users', [
-            'email' => 'transaction@example.com'
+            'email' => 'transaction@example.com',
         ]);
     }
 }

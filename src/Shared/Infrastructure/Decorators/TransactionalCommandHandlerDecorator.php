@@ -10,11 +10,9 @@ use Throwable;
 readonly class TransactionalCommandHandlerDecorator implements CommandHandler
 {
     public function __construct(
-        private CommandHandler      $handler,
+        private CommandHandler $handler,
         private ConnectionInterface $connection
-    )
-    {
-    }
+    ) {}
 
     /**
      * @throws Throwable
