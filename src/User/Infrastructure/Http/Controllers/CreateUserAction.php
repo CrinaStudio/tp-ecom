@@ -4,7 +4,7 @@ namespace Src\User\Infrastructure\Http\Controllers;
 
 use Illuminate\Contracts\Support\Responsable;
 use Src\Shared\Domain\Exceptions\ApiErrorException;
-use Src\Shared\Infrastructure\Factory\TransactionalHandlerFactory;
+use Src\Shared\Infrastructure\Factory\DecorateHandlerFactory;
 use Src\Shared\Infrastructure\Http\Response\ApiErrorResponse;
 use Src\Shared\Infrastructure\Http\Response\ApiSuccessResponse;
 use Src\User\Application\Command\Create\CreateUserHandler;
@@ -17,7 +17,7 @@ class CreateUserAction
     public function __invoke(
         CreateUserRequest $request,
         CreateUserHandler $handler,
-        TransactionalHandlerFactory $transactionalHandlerFactory
+        DecorateHandlerFactory $transactionalHandlerFactory
     ): Responsable {
         try {
             $transactionalHandler = $transactionalHandlerFactory->decorate($handler);

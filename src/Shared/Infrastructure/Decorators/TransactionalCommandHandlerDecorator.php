@@ -7,7 +7,7 @@ use Src\Shared\Domain\Command;
 use Src\Shared\Domain\CommandHandler;
 use Throwable;
 
-readonly class TransactionalCommandHandlerDecorator implements CommandHandler
+final readonly class TransactionalCommandHandlerDecorator implements CommandHandler
 {
     public function __construct(
         private CommandHandler $handler,

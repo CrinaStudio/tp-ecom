@@ -4,7 +4,6 @@ namespace Src\Shared\Infrastructure\Http\Response;
 
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Throwable;
 
@@ -31,7 +30,6 @@ readonly class ApiErrorResponse implements Responsable
                 'line' => $this->exception->getLine(),
                 'trace' => $this->exception->getTraceAsString(),
             ];
-            Log::error($this->exception->getMessage(), $response['debug']);
         }
 
         return response()->json($response, $this->code, $this->headers);
