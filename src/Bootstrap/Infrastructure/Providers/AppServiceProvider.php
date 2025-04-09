@@ -3,7 +3,7 @@
 namespace Src\Bootstrap\Infrastructure\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Src\Shared\Infrastructure\Provider\SharedServiceProvider;
+use Src\Auth\Infrastructure\Provider\AuthServiceProvider;
 use Src\User\Infrastructure\Provider\UserServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,8 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->register(SharedServiceProvider::class);
         $this->app->register(UserServiceProvider::class);
+        $this->app->register(AuthServiceProvider::class);
     }
 
     /**

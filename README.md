@@ -1,160 +1,58 @@
-# Laravel 11 API REST Boilerplate
+KATA : VENTE DES PRODUITS VARIÉS EN PÉRIODE DE SOLDE
+Dans ce KATA l'idée est de simuler les achats des utilisateurs en période de forte demande
+sur une plateforme E-COMMERCE.
 
-Ce projet est un boilerplate pour le développement d'API REST avec Laravel 11, suivant les principes d'architecture hexagonale, de TDD et de bonnes pratiques de développement.
+La plateforme Le Djoor permet à tous les utilisateurs de bénéficier des produits variés à des prix bas durant la période solde.
 
-## Technologies et concepts implémentés
+## BESOINS UTILISATEURS
+Pour ce faire, l'utilisateur sur la plateforme pourra éffectuer les actions suivantes :
 
-- **Laravel 11** : Framework PHP moderne
-- **PHP 8.2+** : Utilisation des dernières fonctionnalités de PHP
-- **Docker** : Conteneurisation pour le développement et la production
-- **MySQL** : Base de données relationnelle
-- **Architecture Hexagonale** : Séparation claire entre domaine, application et infrastructure
-- **Screaming Architecture** : Structure de projet révélant l'intention du code
-- **CQS (Command Query Separation)** : Séparation des opérations de lecture et d'écriture
-- **TDD (Test-Driven Development)** : Développement guidé par les tests
-- **TestContainers** : Conteneurs Docker pour les tests d'intégration
-- **Clean Code** : Principes de code propre et lisible
-- **Monitoring** : Prometheus et Grafana pour la supervision
-- **Logging** : Gestion centralisée des logs
+- Ajouter un produit dans son panier, après l'avoir sélectionné via une liste de base ou après une recherche du produit par son nom.
+- Le panier de l'utilisateur doit toujours présenter de manière visible le nombre de produits sélectionnés, la quantité, le coût par produit, le cout total du panier.
+- A la validation du panier l'utilisateur est rédirigé vers une page de paiement ou il doit fournir ses informations de paiements pour finaliser son achat.
+- Après validation de l'achat une facture est envoyé par mail aux clients.
+- Le client aura la possibilité d'annuler son achat.
+- Lors de l'achat le client à la possibilité de choisir l'option de livraison à domicile ce qui entraine des coûts supplémentaires 
+de livraison ou l'option de retrait en magasin dans l'un des points Le Djoor
+- L'utilisateur a la possibilité de faire livrer son achat en tant que cadeau à une adresse voulue, 
+ce type d'achat inclus des frais supplémentaire de conservation et emballage en tant que cadeau
+- Un achat de type cadeau peut être de type Simple, Anniversaire, Mariage. Chaque type implique un coût spécifique.
+- A la connexion l'utilisateur récupère son panier non payé
 
-## Prérequis
+## CONTRAINTE UTILISATEUR
 
-- Docker et Docker Compose
-- PHP 8.2 ou supérieur (pour le développement local)
-- Composer (pour le développement local)
+- Tous les produits Le Djoor bénéficient d'une réduction sur leur prix vente durant la période de solde qui est définie par l'admin. 
+Il définira aussi le pourcentage, le nombre de produits.
 
-## Installation
+- Notion de codes promo : le client peut utiliser un code promo pour effectuer ses achats,
+le propriétaire du code promo reçoit un pourcentage 
 
-### Installation automatique
+- Hors période de solde un produit peut avoir une réduction spécifique de 5% décidé par l'équipe dirigeante
 
-Pour installer automatiquement le projet, exécutez le script d'initialisation :
+- Lors de l'achat d'un produit, un utilisateur durant la période solde ne peut pendre plus de 20 unités d'un même produit.
 
-```bash
-./init-project.sh
-```
+- A plus de 5 produits différents avec au moins 2 unités par produit l'utilisateur bénéficie d'une remise globale de 5% 
+sur son achat hors mis les frais de livraison et cadeaux (si l'utilisateur choisit ces options)
 
-### Installation manuelle
+- A plus de 10 produits différents avec au moins 4 unités par produit l'utilisateur bénéficie d'une remise globale de 10%
+sur son achat hors mis les frais de livraison et cadeaux (si l'utilisateur choisit ces options)
 
-1. Clonez le dépôt :
-```bash
-git clone <url-du-depot> laravel-api-boilerplate
-cd laravel-api-boilerplate
-```
+- L'annulation d'un achat se fait dans un délai de temps maximum défini par l'admin après son achat
 
-2. Copiez le fichier d'environnement :
-```bash
-cp .env.example .env
-```
+- Un utilisateur connecté a accès à son panier (email+pwd+nom).
+- Un utilisateur ne doit pas se retrouver avec 2 paniers non payés.
 
-3. Lancez les conteneurs Docker :
-```bash
-docker-compose up -d
-```
+## CONTRAINTE GLOBALE
+- Un produit à moins de 5 unités est marqué d'une alerte de rupture de stock en cours, une notification est envoyée aux 
+gestionnaires de stock Le Djoor
 
-4. Installez les dépendances PHP :
-```bash
-docker-compose exec app composer install
-```
+- Lorsqu'une commande est annulée, les produits sont rapidement remis à la vente
+- 02 moyens de paiement CARTE VISA ou CRINA-PAY (service de paiement, historique, Prévoir l'ajout d'un nouveau mode de 
+paiement *penser au O de SOLID) 
+- Listing des paniers non payés
+- Listing des paiements avec filtre par type de paiement
 
-5. Générez la clé d'application :
-```bash
-docker-compose exec app php artisan key:generate
-```
+## STACK
 
-6. Exécutez les migrations :
-```bash
-docker-compose exec app php artisan migrate
-```
-
-## Structure du projet
-
-Le projet suit une architecture hexagonale (ou ports et adaptateurs) avec une séparation claire entre les différentes couches :
-
-- **Domain** : Contient les entités, les value objects, les interfaces de repository et les règles métier
-- **Application** : Contient les use cases (commands/queries) et les services d'application
-- **Infrastructure** : Contient les implémentations concrètes (repositories, controllers, etc.)
-
-```
-app/
-├── Application/       # Use cases et services d'application
-│   ├── Commands/      # Commands (CQS)
-│   ├── Queries/       # Queries (CQS)
-│   ├── EventHandlers/ # Gestionnaires d'événements
-│   └── Services/      # Services d'application
-├── Domain/            # Cœur métier
-│   ├── Entities/      # Entités métier
-│   ├── Events/        # Événements métier
-│   ├── Exceptions/    # Exceptions métier
-│   ├── Repositories/  # Interfaces de repositories
-│   ├── Services/      # Interfaces de services métier
-│   └── ValueObjects/  # Value Objects
-└── Infrastructure/    # Implémentations techniques
-    ├── Database/      # Base de données
-    ├── Http/          # Controllers et routes
-    ├── Logging/       # Gestion des logs
-    └── Monitoring/    # Services de monitoring
-```
-
-## Tests
-
-Pour exécuter les tests, utilisez la commande :
-
-```bash
-./run-tests.sh
-```
-
-Ce script va :
-1. Configurer l'environnement de test
-2. Nettoyer et migrer la base de données de test
-3. Exécuter les tests unitaires, fonctionnels et d'intégration
-
-## Monitoring
-
-Le projet inclut Prometheus et Grafana pour le monitoring. Vous pouvez accéder aux interfaces :
-
-- Prometheus : http://localhost:9090
-- Grafana : http://localhost:3000
-
-## Contribution
-
-Pour contribuer au projet, veuillez suivre ces étapes :
-
-
-setup-rest-api-boilerplate/
-│── docker/                       # 📂 Dossier contenant tous les fichiers Docker
-│   │── nginx/
-│   │   ├── default.conf          # 📄 Configuration Nginx pour le serveur web
-│   │── mysql/
-│   │   ├── my.cnf                # 📄 Configuration MySQL (facultatif)
-│   │── php/
-│   │   ├── Dockerfile            # 📄 Dockerfile pour PHP-FPM + extensions Laravel
-│   │── supervisor/
-│   │   ├── worker.conf           # 📄 Configuration Supervisor pour gérer les workers queue
-│── .dockerignore                 # 🚫 Ignore certains fichiers lors de la copie dans Docker
-│── .env                          # 🛠️ Variables d'environnement Laravel
-│── .env.example                  # 📄 Fichier d'exemple des variables d'environnement
-│── docker-compose.yml             # 🏗️ Fichier de configuration des services Docker
-│── Dockerfile                     # 📄 Dockerfile principal pour Laravel (facultatif si dans docker/php/)
-│── app/                           # 📂 Code source Laravel
-│── bootstrap/                     # 📂 Cache et bootstrap de Laravel
-│── config/                        # 📂 Fichiers de configuration Laravel
-│── database/                      # 📂 Migrations, seeders et factories
-│── routes/                        # 📂 Fichiers des routes API et Web
-│── storage/                       # 📂 Logs, sessions et cache Laravel
-│── vendor/                        # 📂 Dépendances Composer
-│── composer.json                   # 📄 Dépendances Laravel
-│── artisan                         # ⚡ Commandes artisan Laravel
-│── public/                         # 📂 Dossier public accessible (inclut index.php)
-│── tests/                          # 📂 Tests unitaires et fonctionnels
-
-
-1️⃣ Démarrer les containers 🚀
-docker-compose up -d --build
-2️⃣ Vérifier les logs 🔎
-docker-compose logs -f
-3️⃣ Accéder au container PHP 🐳
-docker exec -it laravel_app bash
-4️⃣ Migrer la base de données 🛠️
-docker exec -it laravel_app php artisan migrate
-5️⃣ Arrêter et nettoyer Docker 🧹
-docker-compose down --volumes
+- Front-end : Ts / React 
+- Back-end : Php / Laravel

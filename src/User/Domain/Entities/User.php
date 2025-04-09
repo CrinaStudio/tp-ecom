@@ -2,68 +2,38 @@
 
 namespace Src\User\Domain\Entities;
 
-use Src\Shared\Domain\Exceptions\NotEmptyException;
-use Src\User\Domain\Hasher;
 use Src\User\Domain\Snapshot\UserSnapshot;
-use Src\User\Domain\Vo\Password;
 
 class User
 {
-    private function __construct(
-        private readonly string $id,
+    public function __construct(
+        private string $id,
         private string $name,
         private string $email,
-        private readonly Password $password,
+        private string $password,
+        private string $role,
+
     ) {}
 
-    public static function create(
-        string $name,
-        string $email,
-        string $password,
-        string $userId,
-        Hasher $hasher,
-    ): self {
+    public static function create(string $email, string $password, string $role, string $name): User
+    {
         return new self(
-            id: $userId,
+            id: uniqid(),
             name: $name,
             email: $email,
-            password: new Password($password, $hasher),
+            password: $password,
+            role: $role
         );
     }
 
-    public static function createFromAdapter(
-        string $id,
-        string $name,
-        string $email,
-        string $password,
-    ): User {
-        return new self(
-            id: $id,
-            name: $name,
-            email: $email,
-            password: Password::fromAdapter($password),
-        );
-    }
-
-    /**
-     * @throws NotEmptyException
-     */
     public function snapshot(): UserSnapshot
     {
         return new UserSnapshot(
             id: $this->id,
             name: $this->name,
             email: $this->email,
-            password: $this->password->hash(),
+            password: $this->password,
+            role: $this->role
         );
-    }
-
-    public function update(string $name, string $email): static
-    {
-        $clone = clone $this;
-        $clone->name = $name;
-        $clone->email = $email;
-
-        return $clone;
     }
 }
