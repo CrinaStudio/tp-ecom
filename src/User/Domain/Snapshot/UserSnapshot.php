@@ -11,4 +11,15 @@ readonly class UserSnapshot
         public string $password,
         public string $role
     ) {}
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'role' => $this->role,
+            'password' => $this->password,
+        ];
+    }
 }

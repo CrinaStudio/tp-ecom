@@ -113,13 +113,13 @@ class RegisterUserTest extends TestCase
         $eUser1 = User::create(
             email: 'john@doe.com',
             password: 'password',
-            role: RoleEnum::CUSTOMER->value,
+            role: RoleEnum::CUSTOMER,
             name: 'John Doe'
         );
         $eUser2 = User::create(
             email: 'jane@doe.com',
             password: 'password',
-            role: RoleEnum::CUSTOMER->value,
+            role: RoleEnum::CUSTOMER,
             name: 'Jane Doe'
         );
         $this->repository->create($eUser1);

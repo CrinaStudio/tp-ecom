@@ -2,20 +2,21 @@
 
 namespace Src\User\Domain\Entities;
 
+use Src\User\Domain\Enums\RoleEnum;
 use Src\User\Domain\Snapshot\UserSnapshot;
 
-class User
+readonly class User
 {
     public function __construct(
         private string $id,
         private string $name,
         private string $email,
         private string $password,
-        private string $role,
+        private RoleEnum $role,
 
     ) {}
 
-    public static function create(string $email, string $password, string $role, string $name): User
+    public static function create(string $email, string $password, RoleEnum $role, string $name): User
     {
         return new self(
             id: uniqid(),
@@ -33,7 +34,7 @@ class User
             name: $this->name,
             email: $this->email,
             password: $this->password,
-            role: $this->role
+            role: $this->role->value
         );
     }
 }

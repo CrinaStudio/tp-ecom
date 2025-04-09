@@ -20,7 +20,7 @@ readonly class RegisterUserHandler
 
         try {
             $this->checkIfUserExistOrThrowNotFoundException($command->email);
-            RoleEnum::in($command->role);
+            $role = RoleEnum::in($command->role);
         } catch (InvalidCommandException|AlreadyExistEmailException $e) {
             $response->message = $e->getMessage();
 
@@ -30,7 +30,7 @@ readonly class RegisterUserHandler
         $user = User::create(
             $command->email,
             $command->password,
-            $command->role,
+            $role,
             $command->name
         );
 
