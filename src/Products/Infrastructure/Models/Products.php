@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Produits\Infrastructure\Models;
+namespace Src\Products\Infrastructure\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +13,12 @@ class Products extends Model
         'id',
         'name',
         'price',
-        'stock'
+        'stockQuantity',
+        'description',
+        'salePrice',
+        'costPrice',
+        'status',
+        'shippingClass'
+
     ];
 }
