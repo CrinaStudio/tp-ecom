@@ -1,2 +1,3 @@
 -Lister tous les produits
 -Recherche par nom
+-Ajouter un produit a son panier
