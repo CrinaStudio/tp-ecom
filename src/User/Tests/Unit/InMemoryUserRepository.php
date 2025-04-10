@@ -3,9 +3,9 @@
 namespace Src\User\Tests\Unit;
 
 use Src\User\Domain\Entities\User;
-use Src\User\Domain\Repository\UserRepository;
+use Src\User\Domain\Repository\UserRepositoryInterface;
 
-class InMemoryUserRepository implements UserRepository
+class InMemoryUserRepository implements UserRepositoryInterface
 {
     private array $users;
 

@@ -3,7 +3,9 @@
 namespace Src\User\Infrastructure\Provider;
 
 use Illuminate\Support\ServiceProvider;
-use Src\User\Domain\Repository\UserRepository;
+use Src\User\Domain\Repository\AuthRepositoryInterface;
+use Src\User\Domain\Repository\UserRepositoryInterface;
+use Src\User\Infrastructure\Repository\EloquentAuthRepository;
 use Src\User\Infrastructure\Repository\EloquentUserRepository;
 
 class UserServiceProvider extends ServiceProvider
@@ -12,7 +14,8 @@ class UserServiceProvider extends ServiceProvider
     {
         $this->loadMigrations();
         $this->registerRoutes();
-        $this->app->singleton(UserRepository::class, EloquentUserRepository::class);
+        $this->app->singleton(UserRepositoryInterface::class, EloquentUserRepository::class);
+        $this->app->singleton(AuthRepositoryInterface::class, EloquentAuthRepository::class);
     }
 
     private function loadMigrations(): void

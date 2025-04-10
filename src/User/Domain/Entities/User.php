@@ -19,7 +19,7 @@ readonly class User
     public static function create(string $email, string $password, RoleEnum $role, string $name): User
     {
         return new self(
-            id: uniqid(),
+            id: (string) \Illuminate\Support\Str::uuid(),
             name: $name,
             email: $email,
             password: $password,
