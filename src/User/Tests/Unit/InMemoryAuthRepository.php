@@ -16,12 +16,12 @@ class InMemoryAuthRepository implements AuthRepositoryInterface
 
     public function hasAuthenticatedUser(string $userId): bool
     {
-        foreach ($this->authenticatedUsers as $user)
-        {
-            if($userId == $user->id){
+        foreach ($this->authenticatedUsers as $user) {
+            if ($userId == $user->id) {
                 return true;
             }
         }
+
         return false;
     }
 }

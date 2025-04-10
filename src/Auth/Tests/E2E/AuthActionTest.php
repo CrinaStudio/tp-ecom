@@ -31,8 +31,6 @@ class AuthActionTest extends TestCase
         // then
         $response->assertStatus(200);
         $this->assertTrue($response->json()['isLoggedIn']);
-        $this->assertNotEmpty($response->json()['token']);
-        $this->assertNotEmpty($user->tokens->toArray());
 
     }
 

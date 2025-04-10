@@ -10,8 +10,6 @@ class LogoutAction
     public function __invoke(): JsonResponse
     {
         Auth::logout();
-//        $user = Auth::user();
-//        $user->tokens()->delete();
 
         return response()->json([
             'isLoggedOut' => true,
