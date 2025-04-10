@@ -16,6 +16,7 @@ use Tests\TestCase;
 class RegisterUserTest extends TestCase
 {
     private UserRepositoryInterface $repository;
+
     private AuthRepositoryInterface $authRepository;
 
     protected function setUp(): void
@@ -50,6 +51,7 @@ class RegisterUserTest extends TestCase
     private function registerUser(RegisterUserCommand $command): RegisterUserResponse
     {
         $handler = new RegisterUserHandler(repository: $this->repository, authRepository: $this->authRepository);
+
         return $handler->handle($command);
     }
 

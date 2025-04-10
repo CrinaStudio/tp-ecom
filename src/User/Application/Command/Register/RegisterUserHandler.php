@@ -4,8 +4,6 @@ namespace Src\User\Application\Command\Register;
 
 use Src\Auth\Domain\Entities\AuthUser;
 use Src\Shared\Domain\Exceptions\InvalidCommandException;
-use Src\User\Domain\Entities\Auth;
-use Src\User\Domain\Entities\Authenticate;
 use Src\User\Domain\Entities\User;
 use Src\User\Domain\Enums\RoleEnum;
 use Src\User\Domain\Exceptions\AlreadyExistEmailException;
@@ -17,9 +15,7 @@ readonly class RegisterUserHandler
     public function __construct(
         private UserRepositoryInterface $repository,
         private AuthRepositoryInterface $authRepository
-    )
-    {
-    }
+    ) {}
 
     public function handle(RegisterUserCommand $command): RegisterUserResponse
     {
