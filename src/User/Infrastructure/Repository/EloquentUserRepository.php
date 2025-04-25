@@ -2,11 +2,11 @@
 
 namespace Src\User\Infrastructure\Repository;
 
-use Src\User\Domain\Entities\User;
-use Src\User\Domain\Repository\UserRepositoryInterface;
+use Src\User\Domain\Repository\UserRepository;
+use Src\User\Domain\User;
 use Src\User\Infrastructure\Models\User as UserModel;
 
-class EloquentUserRepository implements UserRepositoryInterface
+class EloquentUserRepository implements UserRepository
 {
     public function __construct() {}
 

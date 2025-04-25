@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\User\Domain\Entities;
+namespace Src\User\Domain;
 
 use Src\User\Domain\Enums\RoleEnum;
 use Src\User\Domain\Snapshot\UserSnapshot;

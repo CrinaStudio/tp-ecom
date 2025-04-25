@@ -4,9 +4,9 @@ namespace Src\User\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
-use Src\User\Domain\Entities\User;
 use Src\User\Domain\Enums\RoleEnum;
-use Src\User\Domain\Repository\UserRepositoryInterface;
+use Src\User\Domain\Repository\UserRepository;
+use Src\User\Domain\User;
 use Src\User\Infrastructure\Repository\EloquentUserRepository;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class UserRepositoryTest extends TestCase
 {
     use RefreshDatabase;
 
-    private UserRepositoryInterface $repository;
+    private UserRepository $repository;
 
     protected function setUp(): void
     {

@@ -7,23 +7,19 @@ use Src\Shared\Domain\Exceptions\InvalidCommandException;
 use Src\User\Application\Command\Register\RegisterUserCommand;
 use Src\User\Application\Command\Register\RegisterUserHandler;
 use Src\User\Application\Command\Register\RegisterUserResponse;
-use Src\User\Domain\Entities\User;
 use Src\User\Domain\Enums\RoleEnum;
-use Src\User\Domain\Repository\AuthRepositoryInterface;
-use Src\User\Domain\Repository\UserRepositoryInterface;
+use Src\User\Domain\Repository\UserRepository;
+use Src\User\Domain\User;
 use Tests\TestCase;
 
 class RegisterUserTest extends TestCase
 {
-    private UserRepositoryInterface $repository;
-
-    private AuthRepositoryInterface $authRepository;
+    private UserRepository $repository;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->repository = new InMemoryUserRepository;
-        $this->authRepository = new InMemoryAuthRepository;
     }
 
     #[Test]
@@ -45,12 +41,12 @@ class RegisterUserTest extends TestCase
         $this->assertEquals('Registered successfully', $response->message);
         $this->assertNotNull($response->userId);
         $this->assertCount(1, $this->repository->all());
-        $this->assertTrue($this->authRepository->hasAuthenticatedUser($response->userId));
+        $this->assertTrue($response->authenticated->isAuthenticated);
     }
 
     private function registerUser(RegisterUserCommand $command): RegisterUserResponse
     {
-        $handler = new RegisterUserHandler(repository: $this->repository, authRepository: $this->authRepository);
+        $handler = new RegisterUserHandler(repository: $this->repository);
 
         return $handler->handle($command);
     }

@@ -2,7 +2,7 @@
 
 namespace Src\Auth\Domain\Entities;
 
-use Src\User\Domain\Entities\User;
+use Src\User\Domain\User;
 
 class AuthUser
 {

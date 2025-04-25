@@ -2,17 +2,14 @@
 
 namespace Src\User\Application\Command\Register;
 
-use Src\User\Domain\Entities\User;
+use Src\Auth\Domain\Entities\AuthUser;
 
 class RegisterUserResponse
 {
     public bool $isCreated = false;
 
     public string $message = '';
-
     public ?string $userId = null;
 
-    public bool $isAuthenticated = false;
-
-    public User $user;
+    public AuthUser $authenticated;
 }

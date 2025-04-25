@@ -9,7 +9,7 @@ class LogoutAction
 {
     public function __invoke(): JsonResponse
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         return response()->json([
             'isLoggedOut' => true,

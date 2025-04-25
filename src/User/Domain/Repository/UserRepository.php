@@ -2,9 +2,9 @@
 
 namespace Src\User\Domain\Repository;
 
-use Src\User\Domain\Entities\User;
+use Src\User\Domain\User;
 
-interface UserRepositoryInterface
+interface UserRepository
 {
     public function create(User $user): void;
 

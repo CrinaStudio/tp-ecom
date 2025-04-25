@@ -27,11 +27,9 @@ class LoginAction
 
         $user = User::query()->where('email', $email)->firstOrFail();
         Auth::login($user);
-        //        $token = $user->createToken('token')->plainTextToken;
 
         return response()->json([
             'isLoggedIn' => true,
-            //            'token' => $token,
-        ]);
+        ], 200);
     }
 }

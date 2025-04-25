@@ -2,10 +2,10 @@
 
 namespace Src\User\Tests\Unit;
 
-use Src\User\Domain\Entities\User;
-use Src\User\Domain\Repository\UserRepositoryInterface;
+use Src\User\Domain\Repository\UserRepository;
+use Src\User\Domain\User;
 
-class InMemoryUserRepository implements UserRepositoryInterface
+class InMemoryUserRepository implements UserRepository
 {
     private array $users;
 
